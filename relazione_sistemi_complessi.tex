@@ -1,0 +1,530 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+\usepackage{listings}
+\lstset{basicstyle=\small\ttfamily}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+
+\mathtoolsset{showonlyrefs,showmanualtags}
+
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{sidecap}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{defn}[theorem]{Definizione}
+
+\newtheorem{prop}{Proposizione}[section]
+
+%%% BackEnd Bibliografico
+%\usepackage{textcomp}
+%\usepackage[autostyle]{csquotes}
+%\usepackage[
+%        backend=biber,
+%        %bibstyle=numeric,
+%        %sorting=ynt
+%    ]{biblatex}
+%\addbibresource{bibliografia.bib}
+%\nocite{*}
+%%%
+
+%%%%%% TESTO EFFETTIVO
+
+\title{Relazione di Fisica dei Sistemi Complessi}
+\author{Carlo Emilio Montanari}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Concetti preliminari}
+In questa sezione si trattano brevemente esempi e proprietà matematiche degli oggetti in uso, necessari alla trattazione del problema in questione di un oscillatore armonico con forzante stocastica.
+
+\subsection{Derivazione dell'equazione di Fokker-Planck}
+Consideriamo l'equazione di Langevin nella sua forma più generale:
+\begin{equation}
+	\dot{x} = a(x,t) + b(x,t)\xi(t)
+\end{equation}
+abbiamo che per una assegnata realizzazione del rumore bianco $\xi(t)$ abbiamo la corrispondente equazione di Liouville stocastica per $\rho(x,t;\xi)$ nella forma
+\begin{equation}
+	\pdv{\rho}{t} + \pdv{}{x}(a\rho) + \xi(t)\pdv{}{x}(b\rho)=0
+\end{equation}
+Riscrivendola nella forma compatta
+\begin{equation}
+	\pdv{\rho}{t} = \vb{A}\rho +\xi(t)\vb{B}\rho
+\end{equation}
+avendo definito gli operatori
+\begin{equation}
+	\vb{A} = -\pdv{}{x} a \quad\quad \vb{B} = - \pdv{}{x} b 
+\end{equation}
+abbiamo la seguente proposizione:
+\begin{prop}
+	Il valore medio $\langle\rho\rangle$ rispetto a tutte le possibili realizzazioni $\xi$ di $\rho(x,t;\xi)$ è una densità di probabilità che soddisfa l'equazione di Fokker-Planck:
+	\begin{equation}
+		\pdv{}{t}\langle\rho\rangle = \vb{A}\langle\rho\rangle + \frac{1}{2}\vb{B}^2\langle\rho\rangle
+	\end{equation}
+\end{prop}
+
+\subsection{Diffusione su superficie toroidale}
+\label{sec:diffusione_toro}
+Definiamo per prima cosa la seguente notazione per il rumore di Wiener ed il suo integrale (ove non indicato diversamente, si fa uso sempre della definizione di integrale secondo Ito):
+\begin{equation}
+	w(t) = \int_0^t \xi(s)\,ds \quad\quad w_1(t)=\int_0^t w(t)\,ds
+\end{equation}
+Abbiamo che possiamo riscrivere $w_1(t)$ nella forma
+\begin{equation}
+	w_1(t) = \int_0^t ds\int_0^s \xi(u)\,du = \int_0^t du\xi(u)\int_u^s\,ds = \int_0^t (t-u)\xi(u)\,du
+\end{equation}
+Rappresentando quindi i processi $w(t)$ e $w_1(t)$ nella forma standard $\int_0^t K(t,s)\xi(s)\,ds$, si ha che $K=1$ per $w(t)$ e che $K=t-s$ per $w_1(t)$. Dalla teoria abbiamo che $\sigma^2 = t$ per il rumore di Wiener $w(t)$ mentre, per il suo integrale $w_1(t)$, abbiamo che:
+\begin{equation}
+	\sigma^2(t) = \int_0^t (t-s)^2\,ds = \frac{t^3}{3}.
+\end{equation}
+
+Consideriamo a questo punto l'esempio più semplice di diffusione angolare per un sistema anisocrono. Sia $x$ una variabile angolare divisa per $2\pi$ definita sul toro $[0, 1]$. Sia poi
+\begin{equation}
+	\dot{x} = \omega + y \quad\quad \dot{y} = \epsilon\xi(t)
+	\label{eq:langevin_toro}
+\end{equation}
+Se si ha una soluzione di diffusione per $x$ definita su $\mathbf{R}$ nella forma $\rho(x,t)$ è possibile ottenere la soluzione sul toro $\rho_T(x,t)$ tramite la periodicizzazione
+\begin{equation}
+	\rho_T(x,t) = \sum_{k=-\infty}^{+\infty} \rho(x+k,t).
+\end{equation}
+La soluzione di \eqref{eq:langevin_toro} su $\mathbf{R}$ è data da
+\begin{equation}
+	y = y_0 + \epsilon w(t) \quad\quad x = x_0 + (\omega + \epsilon y_0) t + \epsilon w_1(t)
+\end{equation}
+Indicando quindi la parte deterministica di $x$ con $\langle x(t) \rangle = x_0 + (\omega + \epsilon y_0) t$, si può scrivere la densità di probabilità su $\mathbf{R}$ nella forma
+\begin{equation}
+	\rho(x,t) = \frac{\exp{\frac{-(x-\langle x(t)\rangle)^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}} \quad\quad \sigma^2 = \epsilon^2 \frac{t^3}{3}
+\end{equation}
+da cui consegue che
+\begin{equation}
+	\rho_T(x,t) = \sum_{k=-\infty}^{+\infty} \frac{\exp{\frac{-(x-\langle x(t)\rangle + n)^2}{2\sigma^2}}}{\sqrt{2\pi\sigma^2}}.
+\end{equation}
+Rappresentando quindi la soluzione in forma di serie di Fourier
+\begin{equation}
+	\rho_T(x,t) = \sum_{k=-\infty}^{+\infty} f_k(t)e^{2\pi i k x}
+\end{equation}
+con i coefficienti $f_k$ dati da
+\begin{equation}
+	f_k = \int_0^1 e^{-2\pi i k x} \rho_T(x,t)\,dx = \sum_{n=-\infty}^{+\infty} \frac{1}{\sqrt{2\pi\sigma^2}} \int_0^1 \exp{\frac{-(x-\langle x(t) \rangle + n)^2}{2\sigma^2} -2\pi i k x}\,dx
+\end{equation}
+portando avanti i conti e supponendo i coefficienti $f_k$ reali, si ottiene
+\begin{equation}
+	\rho_T(x,t) = 1+2\sum_{k=1}^\infty e^{-2\pi^2\sigma^2k^2} f_k \cos(2\pi k (x-\langle x(t) \rangle)).
+\end{equation}
+Il punto più importante di questo esempio è notare come $\rho_T$ rilassa alla distribuzione uniforme come $e^{-\sigma^2}$, tenendo sempre a mente che, in questo caso,
+\begin{equation}
+	\sigma^2 \propto t^{3}.
+\end{equation}
+
+\subsubsection{Considerazioni per sistemi hamiltoniani}
+Consideriamo due casi semplici ma significativi di sistemi hamiltoniani in coordinate azione-angolo perturbati stocasticamente nella forma
+\begin{equation}
+	H = H_0(J) + \epsilon H_1(\Theta, J)\xi(t).
+\end{equation}
+\paragraph{Esempio 1.}
+Consideriamo il caso in cui
+\begin{equation}
+	H = H_0(J) + \epsilon J \xi(t) 
+\end{equation}
+abbiamo che
+\begin{align}
+	\dot{J} &= 0 \\
+	\dot{\Theta} &= \omega(J) + \epsilon\xi
+\end{align}
+dove $\omega(J) = \partial H_0/\partial J$. Abbiamo quindi che $\Theta$ descrive un semplice processo di Wiener la cui soluzione può essere scritta nella forma
+\begin{equation}
+	\Theta = \Theta_0 + \omega t + \epsilon w(t)
+\end{equation}
+da cui consegue una varianza tale che
+\begin{equation}
+	\sigma_{\Theta}^2 \propto t
+\end{equation}
+
+\paragraph{Esempio 2.}
+Consideriamo il caso in cui
+\begin{equation}
+	H = H_0(J) - \epsilon \Theta \xi(t)
+\end{equation}
+abbiamo che
+\begin{align}
+	\dot{J} &= \epsilon\xi \\
+	\dot{\Theta} &= \omega(J)
+\end{align}
+da cui consegue immediatamente che
+\begin{equation}
+	J = J_0 + \epsilon w(t)
+\end{equation}
+se poi andiamo a fare uno sviluppo di Taylor per $\dot{\Theta}$ abbiamo che
+\begin{equation}
+	\dot{\Theta} = \omega(J_0) + \omega'(J_0)\epsilon w(t) + o(\epsilon^2)
+\end{equation}
+che, integrato, porta a
+\begin{equation}
+	\Theta = \Theta_0 + \omega(J_0)t + \epsilon \omega'(J_0) w_1(t)
+\end{equation}
+da cui, sulla base delle osservazioni fatte a inizio sezione, consegue una varianza di $\Theta$ tale che
+\begin{equation}
+	\sigma_{\Theta}^2 \propto t^3
+\end{equation}
+mentre per l'azione $J$ si ha una varianza
+\begin{equation}
+	\sigma_{J}^2 \propto t
+\end{equation}
+Considerato quindi che il tempo di rilassamento della variabile angolare è sempre molto minore del tempo di rilassamento della variabile d'azione, si giustifica quindi per tempi sufficientemente lunghi l'approssimazione di media sulla variabile angolare per le distribuzioni di probabilità.
+
+
+\subsection{Sistemi hamiltoniani con perturbazione stocastica}
+\label{sec:hamiltoniana_stocastica}
+Consideriamo un sistema hamiltoniano perturbato, descritto in coordinate azione-angolo con origine in un punto critico stabile di $H_0$ e le coordinate $(\Theta, J)$ definite nella regione delimitata dalla separatrice. Poniamolo nella forma
+\begin{equation}
+	H = H_0(J) + \epsilon H_1(\Theta, J)\xi(t).
+\end{equation}
+Si ha che la densità di probabilità $\rho(\Theta, J, t)$ soddisfa l'equazione
+\begin{equation}
+	\pdv{\rho}{t} + \Omega \pdv{\rho}{\Theta} = \frac{\epsilon^2 \sigma^2}{2}[H_1, [H_1,\rho]] 
+\end{equation}
+dove $[,]$ è la parentesi di Poisson e $\Omega(J) = \partial H_0/\partial J$.
+
+Se si tiene poi conto che, come mostrato nelle sottosezioni precedenti, l'angolo in quanto variabile toroidale rilassa ad una distribuzione uniforme di equilibrio con un tempo $\tau_{\Theta} \propto \epsilon^{-2/3}$ molto piccolo rispetto alla scala dei tempi di rilassamento $\tau_{J} \propto \epsilon^{-2}$ dell'azione, è possibile semplificare di molto quest'ultima equazione. Si ha che per $t\gg\tau_{\Theta}$ l'equazione per la distribuzione mediata sull'angolo $\rho(J,t)$ soddisfa l'equazione
+\begin{equation}
+	\pdv{}{t}\rho(J,t) = \pdv{}{J}D(J)\pdv{}{J}\rho(J,t)
+\end{equation}
+dove
+\begin{equation}
+	D(J) = \frac{\epsilon^2 \sigma^2}{2}\frac{1}{2\pi}\int_0^{2\pi}\left(\pdv{H_1}{\Theta}\right)^2 \,d\Theta.
+\end{equation}
+
+\paragraph{Dimostrazione:}
+Partiamo dall'equazione di Liouville stocastica:
+\begin{equation}
+	\pdv{\rho}{t} + \Omega(J) \pdv{\rho}{\Theta} + \epsilon\xi(t)[\rho,H_1] = 0
+	\label{eq:dimo_liouville}
+\end{equation}
+Scriviamo ora $\rho$ nella forma $\rho = \rho_0 + \epsilon\rho_1$ dove $\rho_0$ è la componente media e $\rho_1$ la parte fluttuante a media nulla, considerando anche che $\langle\xi\rangle = 0$ abbiamo che il valor medio di \eqref{eq:dimo_liouville} è
+\begin{equation}
+	\pdv{\rho_0}{t} + \Omega(J)\pdv{\rho_0}{\Theta} + \epsilon^2[\langle\xi(t)\rho_1\rangle, H_1] = 0
+	\label{eq:dimo_media}
+\end{equation}
+Sottraendo ora \eqref{eq:dimo_media} da \eqref{eq:dimo_liouville}, si ottiene l'equazione
+\begin{equation}
+	\pdv{\rho_1}{t} + \Omega(J) \pdv{\rho_1}{\Theta} = -\xi(t)[\rho_0, H_1] + O(\epsilon)
+\end{equation}
+che desideriamo risolvere per $\rho_1$ in modo da poter sostituire in \eqref{eq:dimo_media}. Per riuscirci eseguiamo il cambio di variabili
+\begin{align}
+	\Theta &\to \Theta - \Omega \tau \\
+	t &\to t - \tau
+\end{align}
+che ci permette di scrivere
+\begin{equation}
+	\dv{}{\tau}\rho_1(\Theta - \Omega \tau, J, t - \tau) = \xi(t- \tau)[\rho_0, H_1](\Theta - \Omega \tau, J, t - \tau)
+\end{equation}
+che possiamo integrare da $\tau = 0$ a $\tau = t$, ottenendo
+\begin{equation}
+	\rho_1(\Theta, J, t) = -\int_0^t[\rho_0, H_1](\Theta - \Omega \tau, J, t - \tau)\xi(t-\tau)\,d\tau
+\end{equation}
+dove abbiamo sfruttato il fatto che $\rho_1(\Theta, J, 0)=0$. Moltiplicando poi entrambi i membri per $\xi(t)$ e calcolando il valor medio rispetto a tutte le realizzazioni del rumore, abbiamo nel caso di un rumore di Wiener che
+\begin{equation}
+	\langle \xi(t)\rho_1(\Theta, J, t) \rangle = -\frac{1}{2}\sigma^2 [\rho_0, H_1](\Theta, J, t)
+\end{equation}
+Andando quindi a sostituire questo risultato in \eqref{eq:dimo_media}, andiamo ad ottenere, a meno di termini di ordine $\epsilon^3$, l'equazione per la densità media
+\begin{equation}
+ 	\pdv{\rho_0}{t} + \Theta \pdv{\rho_0}{\Theta} = \frac{\epsilon^2 \sigma^2}{2}[[\rho_0, H_0], H_0].
+\end{equation} 
+Come abbiamo visto nella sezione \ref{sec:diffusione_toro}, per tempi sufficientemente lunghi abbiamo che in buona approssimazione $\rho = \rho(J,t)$ non dipende dall'angolo e fa avere come doppia parentesi di Poisson
+\begin{equation}
+	[[\rho_0, H_0], H_0] = \pdv{}{J}\left[\left(\pdv{H_1}{\Theta}\right)^2 \pdv{\rho_0}{J}\right] - \pdv{}{\Theta}\left[\pdv{\rho_0}{J}\pdv{H_1}{\Theta}\pdv{H_1}{J}\right]
+\end{equation}
+Prendendo quindi la media angolare di quest'ultima equazione, il secondo termine del lato destro si annulla e si trova l'espressione del coefficiente di diffusione $D(J)$ da dover integrare lungo l'intero angolo.
+
+\subsection{Fluttuazione e Dissipazione}
+\label{sec:fluttuazione_dissipazione}
+Consideriamo ora la seguente equazione di Langevin
+\begin{align}
+	\dv{x}{t} &= \frac{p}{m}\\
+	\dv{p}{t} &= F_{ex} - \gamma p + \epsilon\xi(t)
+\end{align}
+Abbiamo che la funzione di densità nello spazio delle fasi $\rho(x,p,t)$ soddisfa l'equazione di Fokker-Planck
+\begin{equation}
+	\pdv{\rho}{t} + \pdv{}{x} (\frac{p}{m}\rho) + \pdv{}{p} (F_{ex}\rho - \gamma p \rho) = \epsilon^2\pdv[2]{\rho}{p}
+\end{equation}
+Se la forza esterna $F_{ex}$ è conservativa ed ammette un potenziale $V$, è possibile trovare una soluzione analitica di equilibrio per questa equazione di Fokker-Planck. La soluzione di equilibrio si scrive nella forma:
+\begin{equation}
+	\rho(x,p) = Z^{-1} \exp{-\frac{H}{k_B T}}
+\end{equation}
+dove si è posto
+\begin{equation}
+	H = \frac{p^2}{2m} + V(x) \quad\quad k_b T = \frac{\epsilon^2}{2 m \gamma}
+\end{equation}
+e dove con $Z$ si indica la costante di normalizzazione tale che $\int f\,dx\,dp = 1$. È evidente che la soluzione di equilibrio corrisponde alla distribuzione di Maxwell Boltzmann.
+
+\subsection{Integrazione numerica di una equazione di Langevin}
+\label{sec:integratore}
+Consideriamo sempre una equazione di Langevin nella seguente forma:
+\begin{align}
+	dq(t) &= p(t)dt \\
+	dp(t) &= f(q(t))dt - \gamma p(t)dt + \sigma dw(t)
+\end{align}
+dove $w(t)$ è un processo di Weiner. Vogliamo implementare una discretizzazione valida di questa equazione, riuscendo a mantenere le proprietà statistiche principali causate dalla presenza del processo di Weiner e che mantenga una accuratezza di ordine $\Delta t^2$. Se cominciamo integrando il sistema da $t$ a $t + \Delta t$
+\begin{align}
+	q(t+\Delta t) &= q(t) + \int_t^{t+\Delta t} p(s)\,ds\\
+	p(t+\Delta t) &= p(t) + \int_t^{t+\Delta t} f(q(s))\,ds -\gamma \int_t^{t+\Delta t} p(s)\,ds + \,\, \sigma[w(t+\Delta t)-w(t)]
+\end{align}
+
+Entrambe le equazioni contengono integrali in $p$ e in $f$ che producono termini di ordine $\Delta t$ e superiore nella discretizzazione. Cominciamo ad analizzare l'equazione per $p$, che può essere usata all'ordine più basso:
+\begin{equation}
+	p(s) \approx p(t) + (s-t)f(q(t)) -(s-t)\gamma p(t) + \sigma[w(s)-w(t)]
+\end{equation}
+dove $t\leq s\leq t+\Delta t$. Integrando l'equazione in questa forma da $t$ a $t+\Delta t$ otteniamo:
+\begin{equation}
+	\int_t^{t+\Delta t} p(s)\,ds = \Delta t p(t) + C(t)
+\end{equation}
+dove si è definito
+\begin{equation}
+	C(t) \equiv \frac{\Delta t^2}{2}[f(q(t))-\gamma p(t)] + \sigma \int_t^{t+\Delta t}[w(s)-w(t)]\,ds
+	\label{eq:c_t}
+\end{equation}
+questo può essere usato come approssimazione degli integrali su $p$ che compaiono nelle equazioni precedenti.
+
+Per approssimare l'integrale su $f$, cominciamo sfruttando la relazione
+\begin{equation}
+	\dv{f}{t} = \pdv{f}{q} \dot{q} = \pdv{f}{q} p
+\end{equation}
+ottenendo quindi
+\begin{equation}
+	f(q(s)) = f(q(t))+\int_t^s p(k)f'(q(k))\,dk \approx f(q(t))+(s-t)p(t)f'(q(t))
+\end{equation}
+e, come prima, integriamo questa da $t$ a $t+\Delta t$, ottenendo
+\begin{equation}
+	\int_t^{t+\Delta t} f(q(s))\,ds = \Delta t f(q(t)) + \frac{\Delta t^2}{2}p(t)f'(q(t)) = \Delta t \frac{f(q(t+\Delta t))+ f(r(t))}{2}
+\end{equation}
+dove l'ultima uguaglianza è stata ottenuta tramite la seguente relazione:
+\begin{equation}
+	f(q(t+\Delta t)) = f(q(t)) + f'(q(t))(q(t+\Delta t)-q(t)) = f(q(t)) + f'(q(t))p(t)\Delta t.
+\end{equation}
+
+Per computare correttamente il termine $w(t+\Delta t) - w(t)$, sfruttiamo la relazione
+\begin{equation}
+	w(t+\Delta t) - w(t) = \sqrt(\Delta t)\,\xi \label{eq:xi_wiener}
+\end{equation}
+resta però da calcolare l'integrale della differenza tra due funzioni di Wiener nell'espressione \eqref{eq:c_t} di $C(t)$. Sfruttando il fatto che
+\begin{equation}
+	\langle w(s)w(s') \rangle = \int_0^s \int_0^{s'} \langle \eta(t)\eta(t') \rangle\,dt\,dt' = \int_0^s \int_0^{s'} \delta(t'-t) \,dt\,dt' = \min(s,s')
+\end{equation}
+si può dimostrare che:
+\begin{align}
+	\left\langle (w(t+\Delta t)-w(t))\int_t^{t+\Delta t} (w(s')-w(t))\,ds' \right\rangle &= \frac{\Delta t^2}{2} \label{eq:cosaaaaaa}\\
+	\left\langle \int_t^{t+\Delta t} (w(s)-w(t))\,ds \int_t^{t+\Delta t} (w(s')-w(t))\,ds' \right\rangle &= \frac{\Delta t^3}{3} \label{eq:da_rispettare}
+\end{align}
+Possiamo quindi fare in modo che l'equazione \eqref{eq:da_rispettare} sia rispettata esprimendo
+\begin{equation}
+	\int_t^{t+\Delta t} (w(s) - w(t))\,ds = \Delta t^{3/2}\eta
+	\label{eq:forma_quasi_finale}
+\end{equation}
+con $\eta$ numero random tale che $\langle\eta\rangle = 0$ e $\langle\eta^2\rangle = 1/3$. Sfruttando quindi \eqref{eq:xi_wiener} e \eqref{eq:da_rispettare} in \eqref{eq:forma_quasi_finale}, otteniamo $\langle \xi \eta \rangle = 1/2$, ossia, i due numeri random sono inevitabilmente correlati. Per risolvere questo problema riformuliamo $\eta$ in due variabili random non correlate:
+\begin{equation}
+	\eta = a \xi + b \theta
+\end{equation}
+tali che $\langle\theta\rangle = 0$, $\langle\theta^2\rangle = 1$ e $\langle\xi\theta\rangle = 0$. Determiniamo quindi $a$ e $b$ imponendo che $\langle \xi \eta\rangle = 1/2$ e che $\langle\eta^2\rangle = 1/3$ per ottenere quindi $a = 1/2$ e $b = 1/(2\sqrt{3})$. Otteniamo finalmente:
+\begin{equation}
+	\int_t^{t+\Delta t} (w(s) - w(t))\,ds = \Delta t^{3/2} \left( \frac{\xi}{2} + \frac{\omega}{2\sqrt{3}} \right)
+\end{equation}
+Mettendo insieme tutti i risultati raccolti fino ad ora, si ottiene \textbf{L'integratore al secondo ordine dell'equazione di Langevin:}
+\begin{align}
+ 	C(t) &= \frac{\Delta t^2}{2} [f(q(t)) - \gamma p(t)] + \sigma \Delta t^{3/2} \left(\frac{\xi(t)}{2} + \frac{\theta(t)}{2\sqrt{3}} \right) \\
+ 	q(t+\Delta t) &= q(t) + \Delta t p(t) + C(t) \\
+ 	p(t+\Delta t) &= p(t) + \frac{\Delta t}{2}[f(q(t+\Delta t)) + f(q(t))] - \Delta t \gamma p(t) \\ &+ \sigma \sqrt{\Delta t}\,\xi(t) - \gamma C(t)
+\end{align}
+Dove $\xi$ e $\theta$, nel contesto di una simulazione in Python, vengono espressi ad ogni step temporale estraendo un valore casuale da una distribuzione normale di media nulla e varianza unitaria tramite la funzione \lstinline{numpy.random.normal()}.
+
+\subsection{Invarianza adiabatica nell'oscillatore armonico}
+Sia $H(q,p;\lambda)$ una hamiltoniana con un singolo grado di libertà. Supponiamo che $\lambda(t)$ vari lentamente nel tempo, dove per lentamente si intende matematicamente che esiste un $\epsilon$ tale che
+\begin{equation}
+	\frac{1}{n!}\abs{\dv[n]{\lambda}{t}} \leq \epsilon^n
+\end{equation}
+Possiamo per esempio lavorare semplicemente con $\lambda = \epsilon t$ con $\epsilon$ molto piccolo.
+
+Si definisce un invariante adiabatico una funzione $J(p,q;\lambda)$ del sistema $H$ se questa è tale che, per ogni $\epsilon > 0$, esiste un $\epsilon_0>0$ tale che, se $\epsilon < \epsilon_0$, $0<t<(1/\epsilon)$ si ha che
+\begin{equation}
+	\abs{J(q(t),p(t);\epsilon t) - J(q(0), p(0);0)}<c\epsilon^\alpha \quad\quad (\alpha > 0)
+\end{equation}
+Per esempio, se abbiamo un invariante adiabatico $J$, abbiamo, per un tempo $t<(1/\epsilon)$, $\alpha=1$, che $J(t)-J(0) = \mathcal{O}(\epsilon)$.
+
+È possibile dimostrare che ogni sistema unidimensionale ammette un invariante adiabatico e che la variabile di Azione risulta essere un invariante adiabatico. Ricordiamo che quando ci si riferisce a variabili Azione-Angolo in un sistema hamiltoniano $H(q,p)$ unidimensionale, ci si riferisce ai seguenti integrali
+\begin{align}
+	J &= \frac{1}{2\pi} \oint_{H=E} p\,dq \\
+	\Theta &= \pdv{}{J} \int_{H=E} p\,dq
+\end{align}
+dove la curva $\gamma(E)$ è una curva di livello chiusa nello spazio delle fasi all'interno di una regione delimitata da una separatrice. Ricordiamo inoltre che il cambio di coordinate $(p,q)\to(J,\Theta)$ è canonico e che possiamo definire la frequenza $\omega$ nella forma $\omega = \partial H / \partial J$.
+
+Analizziamo quindi il caso di un oscillatore armonico unidimensionale con frequenza $\omega(\lambda)$ lentamente variante nel tempo. Consideriamo $\lambda = \epsilon t$ e $\omega(\lambda) = \lambda(\omega_1 - \omega_0) + \omega_0$.\\
+Prima di considerare la perturbazione, ricordiamo che l'hamiltoniana dell'oscillatore armonico è
+\begin{equation}
+	H = \frac{p^2}{2} + \omega^2\frac{q^2}{2}
+\end{equation}
+e che, per energia $E$ fissata, il moto descrive una curva di livello di forma ellittica che rende immediato il calcolo della variabile Azione
+\begin{equation}
+	J = \frac{E}{\omega} = \frac{1}{2\omega}(p^2 + \omega^2 q^2)
+\end{equation}
+Introducendo quindi la perturbazione causata da $\lambda$ (consideriamo $\omega_0 = 1$ e $\omega_1 = 2$, avendo quindi $\omega = 1+\lambda$), abbiamo
+\begin{equation}
+	J = \frac{q^2(1+\epsilon t)}{2} + \frac{p^2}{2(1+\epsilon t)}
+\end{equation}
+che sviluppando con Taylor diventa
+\begin{equation}
+	J = \frac{q^2}{2} + \frac{p^2}{2} + \epsilon\left(\frac{q^2 t}{2}-\frac{p^2 t}{2}\right) + \mathcal{O}(\epsilon^2)
+\end{equation}
+Per poter dire che $J$ è un invariante adiabatico, bisogna dimostrare che, lungo un periodo,
+\begin{equation}
+	\Delta J = \mathcal{O}(\epsilon^2)
+\end{equation}
+Considerando il periodo di una oscillazione completa $T$,
+\begin{equation}
+	\Delta J = J(T) - J(0) = \epsilon\left(\frac{q^2}{2} - \frac{p^2}{2}\right)T + \mathcal{O}(\epsilon^2)
+\end{equation}
+che possiamo riesprimere nella forma
+\begin{equation}
+	\Delta J = \epsilon(H(T) - H(0))T - \epsilon^2 T^2 \frac{q^2}{2} + \mathcal{O}(\epsilon^2)
+\end{equation}
+e, avendo che in un periodo $H(T) - H(0) = \epsilon T \frac{q^2}{2}$, si dimostra che
+\begin{equation}
+	\Delta J = \mathcal{O}(\epsilon^2)
+\end{equation}
+e si ha quindi che $J$ è un invariante adiabatico.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Oscillatore armonico smorzato con rumore stocastico}
+Consideriamo un oscillatore armonico immerso in un fluido soggetto a due tipi di forze, una stocastica dovuta a urti casuali con le molecole del fluido ed una sistematica dovuta alla resistenza che il fluido oppone al suo moto. Abbiamo l'equazione di Langevin:
+\begin{align}
+	\dot{q} &= p\\
+	\dot{p} &= -\omega^2 q - \gamma p + \sqrt{2T\gamma}\,\,\xi(t)
+\end{align}
+Dalle considerazioni fatte nella sezione \ref{sec:fluttuazione_dissipazione}, possiamo calcolare la distribuzione di equilibrio
+\begin{equation}
+	\rho(q,p) = Z^{-1} \exp{-\frac{\frac{p^2}{2}+\frac{\omega^2q^2}{2}}{T}}
+\end{equation}
+dove in questo caso $Z^{-1}=\omega/2T\pi$.
+
+Se vogliamo invece trattare il problema utilizzando le variabili azione-angolo standard per un oscillatore armonico ideale
+\begin{equation}
+	J = \frac{p^2}{2\omega} + \frac{\omega q^2}{2} \quad\quad\quad\quad \Theta = \atan\left(\frac{\omega q}{p}\right)
+\end{equation}
+ci troviamo ad avere
+\begin{equation}
+	\rho(J, \Theta) = \frac{\omega}{2\pi T} \exp\left(-\frac{J\omega}{T}\right)
+\end{equation}
+dove figura immediatamente come $\Theta$ sia uniformemente distribuita all'equilibrio (e che quindi compare come un termine $1/2\pi$ nella costante di normalizzazione).\\
+Portando avanti i conti e sfruttando in particolare
+\begin{equation}
+	q = \sqrt{\frac{2J}{\omega}}\,\,\sin{\Theta} \quad\quad\quad p = \sqrt{2J\omega}\,\,\cos{\Theta}
+\end{equation}
+si ha che
+\begin{align}
+	\dot{J} &= \frac{p\dot{p}}{\omega} + \omega q\dot{q}\\
+	&= -2J\gamma \cos^2\Theta \,+\, \xi(t)\sqrt{\frac{4JT\gamma}{\omega}}\cos\Theta
+\end{align}
+per ottenere una equazione descrivente l'evoluzione di $\rho$, è possibile ragionare in termini di approssimazione di media sulla variabile angolare: possiamo trascurare per tempi sufficientemente lunghi $(t > \epsilon^{-2/3} = (4T\gamma/\omega)^{-1/3})$ l'espressione di $\dot{\Theta}$ e trattarla come tendente rapidamente alla distribuzione uniforme, mentre l'espressione di $\dot{J}$ risulta formata da un termine dissipativo e da un termine stocastico che è riconducibile alla trattazione della sezione \ref{sec:hamiltoniana_stocastica}. Possiamo scrivere in prima istanza:
+\begin{equation}
+	\pdv{\rho}{t} = \gamma \pdv{}{J} 2J\cos^2\Theta\,\,\rho + \pdv{}{J} J\frac{2T\gamma}{\omega}\cos^2\Theta \pdv{}{J} \rho
+\end{equation} 
+che, mediato rispetto alla variabile angolare, ritorna
+\begin{equation}
+	\pdv{\rho}{t} = \gamma \pdv{}{J} J\rho + \pdv{}{J} J\frac{T\gamma}{\omega} \pdv{}{J} \rho
+	\label{eq:pendolo_fokker_planck_1}
+\end{equation}
+dove abbiamo sfruttato $\int_0^{2\pi}\cos^2\theta\, d\theta = \pi$.\\
+Perché questa trattazione sia consistente, è necessario che
+\begin{equation}
+	\frac{\gamma}{\omega} \ll 1
+	\label{eq:necessario}
+\end{equation}
+avendo infatti che $\epsilon \propto \gamma/\omega$, che $\tau_\Theta \propto \epsilon^{-2/3}$ e che $\tau_J \propto \epsilon^{-2}$, si ha che deve valere \eqref{eq:necessario} affinché sia abbia $\tau_J \gg \tau_\Theta$. 
+
+\subsection{Analisi numerica}
+
+Si cerca ora un riscontro della teoria nei risultati numerici. Dove non indicato diversamente, vengono assegnati i seguenti valori numerici ai parametri delle simulazioni:
+\begin{center}
+	\begin{tabular}{cS}
+	\toprule
+	Costante & {Valore assegnato} \\
+	\midrule
+	$q_0$		& 0.	\\
+	$p_0$		& 1.	\\
+	$\omega$	& 1.	\\
+	$\gamma$	& 0.01	\\
+	$T$			& 10.	\\
+	$dt$		& 0.1	\\
+	\bottomrule
+	\end{tabular}
+	\label{tab:valori_1}
+\end{center}
+
+\subsubsection{Rilassamento all'equilibrio}
+
+Dati i valori in Tabella \ref{tab:valori_1}, abbiamo il grafico della distribuzione di equilibrio per $\rho(J)$ in Fig.~\ref{fig:equilibrio_J_1}, mentre per $\rho(\Theta)$ si ha una distribuzione uniforme lungo l'intervallo $[0,2\pi]$.
+
+Possiamo in primo luogo simulare numericamente l'equazione di Langevin usando l'integratore descritto in Sezione \ref{sec:integratore} ed ottenere il grafico riportato in Fig.~\ref{fig:eq_lang_J_1} per quel che riguarda la variabile Azione $J$ ed il grafico in Fig~\ref{fig:eq_lang_Th_1} per quel che riguarda la variabile Angolo. Oltre a questi grafici sono anche stati prodotti dei video che permettono di apprezzare la stazionarietà delle distribuzioni.
+
+Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_planck_1}, vogliamo verificare che, con equivalenti condizioni iniziali (un picco di probabilità per $J=1$, zero altrove), questa converga fino alla soluzione stazionaria. Per integrarla numericamente si fa uso dello schema implicito di Crank-Nicolson impostando come parametri ulteriori necessari\footnote{$L$ rappresenta la regione considerata per l'integrazione, si pone una barriera assorbente per valori di $J$ superiori al limite considerato, questo inevitabilmente porterà su lunghi periodi a perdita di flusso, tuttavia, ponendo la barriera molto in avanti, dove la distribuzione teorica di equilibrio assume valori prossimi allo zero, si può ritenere questa perdita trascurabile.}:
+\begin{center}
+	\begin{tabular}{cc}
+	\toprule
+	Costante & {Valore assegnato} \\
+	\midrule
+	$L$			& [0,200]	\\
+	$dx$		& 0.1	\\
+	\bottomrule
+	\end{tabular}
+	\label{tab:valori_2}
+\end{center}
+Dall'integrazione si ottiene il grafico in Fig.~\ref{fig:eq_crank_1}.
+
+
+
+\subsubsection{Tempi di rilassamento della variabile angolare}
+
+\subsubsection{Analisi del processo di ritorno all'equilibrio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Oscillatore armonico con frequenza lentamente variante nel tempo}
+
+Consideriamo adesso la seguente equazione di Langevin:
+\begin{align}
+	\dot{q} &= p \\
+	\dot{p} &= -\omega^2(\lambda)q - \gamma p + \sqrt{2T\gamma} \xi(t)
+\end{align}
+dove $\lambda\in[0,1]$ è un parametro dipendente linearmente col tempo che varia molto lentamente. Trattiamo la funzione di $\omega$ nella forma
+\begin{equation}
+ 	\omega (\lambda) = \lambda \omega_1 + (-\lambda + 1) \omega_0
+\end{equation} 
+con $\omega_1 > \omega_0$.
+
+\subsection{Analisi numerica}
+
+\end{document}
