@@ -1,7 +1,7 @@
 executable            = stochastic_pendulum.py
-output                = output/radscan.$(ClusterId).$(ProcId).out
-error                 = error/radscan.$(ClusterId).$(ProcId).err
-log                   = log/radscan.$(ClusterId).log
+output                = output/osc1.$(ClusterId).$(ProcId).out
+error                 = error/osc1.$(ClusterId).$(ProcId).err
+log                   = log/osc1.$(ClusterId).log
 +JobFlavour = "tomorrow"
 
 queue 10000
