@@ -4,7 +4,7 @@ omega = 1.
 gamma = 0.01
 T = 10.
 dt = 0.1
-t_max = 10
+t_max = 50
 
 omega0 = 1.
 omega1 = 2.
@@ -19,7 +19,7 @@ sigma = np.sqrt(2 * T * gamma)
 
 # Liouville
 N = int(dt/t_max)
-samples = 10
+samples = 1000000
 q0 = 0.
 p0 = 1.
 

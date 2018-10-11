@@ -54,5 +54,5 @@ angle = angle + np.pi
 
 action = np.transpose(action)
 
-np.save("action", action)
-np.save("angle", angle)
+np.save("action_time", action)
+np.save("angle_time", angle)

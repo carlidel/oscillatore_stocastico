@@ -122,3 +122,5 @@ for j in range(nsteps):
     L, R, B = generate_matrices(T, gamma, omega0, omega1, M, h, k, lambda_par,
                                 dt * j)
     bb = R.dot(u[j + 1][1:-1]) + B
+
+np.save("crank_time", u)

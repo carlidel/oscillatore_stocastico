@@ -114,3 +114,5 @@ for j in range(nsteps):
     u[j + 1][1:-1] = np.linalg.solve(L, bb)
     # Aggiorna rhs
     bb = R.dot(u[j + 1][1:-1]) + B
+
+np.save("crank", u)
