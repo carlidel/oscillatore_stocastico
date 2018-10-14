@@ -130,7 +130,7 @@ Da qui, vale la soluzione per \(\vb{U}_I\)
 \end{equation}
 Si può quindi calcolare la media della soluzione di \(\vb{U}_I\) rispetto alle realizzazioni di \(\xi \) usando lo sviluppo in serie della soluzione e considerando la forma del valor medio dei prodotti del rumore bianco, che è nullo quando il numero di fattori è dispari. Si ha quindi
 \begin{align}
-	\langle\vb{U}_I\rangle &= \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!}\int_0^t dt_1 \cdots \int_0^t dt_{2n} \mathds{T}(\vb{B}_I(t_1)\cdot\vb{B}_I(t_{2n})) \delta(t_1 + t_{n+1})\delta(t_2 + t_{n+2})\cdots\delta(t_n + t_{2n}) \\
+	\langle\vb{U}_I\rangle &= \sum_{n=0}^\infty \frac{(2n-1)!!}{(2n)!}\int_0^t dt_1 \cdots \int_0^t dt_{2n} \mathds{T}(\vb{B}_I(t_1)\cdots\vb{B}_I(t_{2n})) \delta(t_1 + t_{n+1})\delta(t_2 + t_{n+2})\cdots\delta(t_n + t_{2n}) \\
 	&= \sum_{n=0}^\infty \frac{1}{2^n n!} \mathds{T}\left(\int_0^t dt_1 \cdots \int_0^t dt_n \vb{B}_I^2(t_1)\cdots\vb{B}_I^2(t_n)\right) \\
 	&= \exp(\frac{1}{2}\mathds{T}\int_0^t ds\, \vb{B}_I^2(s))
 \end{align}
@@ -340,6 +340,30 @@ dove si è posto
 	H = \frac{p^2}{2m} + V(x) \quad\quad k_b T = \frac{\epsilon^2}{2 m \gamma}
 \end{equation}
 e dove con \(Z\) si indica la costante di normalizzazione tale che \(\int f\,dx\,dp = 1\). È evidente che la soluzione di equilibrio corrisponde alla distribuzione di Maxwell Boltzmann.
+
+\subsection{Averaging Principle}
+\label{subsec:averaging_principle}
+Se una piccola perturbazione (e.g.\ un processo stocastico con \(\epsilon \) piccolo) viene applicata ad un sistema conservativo, si ha che le quantità che prima erano integrali primi del moto cominciano ad evolvere lentamente. Su scale di tempo di ordine 1 tali evoluzioni sono piccole, su tempi di ordine \(1/\epsilon \) l'evoluzione può essere non trascurabile.
+
+Tramite l'\textit{averaging principle}, è possibile scrivere una equazione di evoluzione contenente solamente tali variabili lente, trascurando le variabili veloci. Questo, va ribadito, è un principio fisico e non un teorema e, in quanto tale, non ha una formulazione matematica rigorosa.
+
+Assumiamo un sistema in coordinate azione-angolo in cui le coordinate angolari appartengono ad una superficie toroidale. Assumiamo inoltre che le equazioni del moto non perturbato possano essere scritte nella forma:
+\begin{align}
+	\dot{I} &= 0,\\
+	\dot{\theta} &= \omega(I)
+\end{align}
+Una piccola perturbazione al sistema fa sorgere nuovi termini nelle equazioni del moto, questi termini assumono la forma:
+\begin{align}
+	\dot{I} &= \epsilon f(I, \theta, \epsilon),\\
+	\dot{\theta} &= \omega(I) + \epsilon g(I, \theta, \epsilon)
+\end{align} 
+dove $f$ e $g$ hanno periodo $2\pi$ in $\theta$ ed $\epsilon$ è piccolo. La variabile azione $I$ viene detta \textit{variabile lenta} mentre la variabile angolo $\theta$ viene detta \textit{variabile veloce}.
+
+Essendo di norma interessante conoscere il comportamento nel tempo della variabile lenta, l'averaging principle consiste nel rimpiazzare il sistema di equazioni perturbate con il sistema mediato
+\begin{equation}
+	\dot{J} = \epsilon F(J), \qquad F(J) = \frac{1}{2\pi} \oint_{\mathds{T}} f(J,\theta,0)\,d\theta
+\end{equation}
+per descrivere l'evoluzione approssimata delle variabili lente del sistema lungo tempi di ordine $1/\epsilon$. 
 
 \subsection{Invarianza adiabatica nell'oscillatore armonico}
 Sia \(H(q,p;\lambda)\) una hamiltoniana con un singolo grado di libertà. Supponiamo che \(\lambda(t)\) vari lentamente nel tempo, dove per lentamente si intende matematicamente che esiste un \(\epsilon\) tale che
@@ -563,21 +587,24 @@ Portando avanti i conti e sfruttando in particolare
 si ha che
 \begin{align}
 	\dot{J} &= \frac{p\dot{p}}{\omega} + \omega q\dot{q}\\
-	&= -2J\gamma \cos^2\theta \,+\, \xi(t)\sqrt{\frac{4JT\gamma}{\omega}}\cos\theta
+	&= -2J\gamma \cos^2\theta \,+\, \xi(t)\sqrt{\frac{4JT\gamma}{\omega}}\cos\theta \\
+	\dot{\theta} &= \frac{\omega p \dot{q} - \omega q \dot{p}}{\omega^2 q^2 + p^2}\\
+	&= \frac{\omega p^2 -\omega q(-\omega^2 q - \gamma p + \sqrt{2 T \gamma}\xi(t))}{\omega^2 q^2 + p^2}\\
+	&= \omega + \gamma \sin{\theta}\cos{\theta} - \sqrt{\frac{T\gamma}{J\omega}}\xi(t)\sin{\theta}
 \end{align}
 per ottenere una equazione descrivente l'evoluzione di \(\rho\), è possibile ragionare in termini di approssimazione di media sulla variabile angolare: se imponiamo che
 \begin{equation}
 	\frac{\gamma}{\omega} \ll 1
 \end{equation}
-possiamo considerare i tempi di evoluzione della variabile angolare \(\theta \) sufficientemente piccoli rispetto ai tempi di evoluzione della variabile azione \(J\) e trattare quindi \(\theta \) come distribuita uniformemente lungo la superficie toroidale, pur essendo comunque i suoi tempi effettivi di rilassamento a tale distribuzione comparabili a quelli della variabile azione. 
+possiamo considerare i tempi di evoluzione della variabile angolare \(\theta \) sufficientemente piccoli rispetto ai tempi di evoluzione della variabile azione \(J\) e trattare quindi il sistema con il metodo dell'averaging principle trattato in sezione~\ref{subsec:averaging_principle}. L'applicazione del principio equivale a trattare \(\theta \) come distribuita uniformemente lungo la superficie toroidale, pur essendo comunque i suoi tempi effettivi di rilassamento a tale distribuzione comparabili a quelli della variabile azione. 
 
-Possiamo scrivere in prima istanza:
+Scrivendo in prima istanza l'equazione di evoluzione di $\rho$:
+\begin{multline}
+	\pdv{\rho}{t} = \gamma \pdv{}{J} 2J\cos^2\theta\,\,\rho + \pdv{}{J} J\frac{2T\gamma}{\omega}\cos^2\theta \pdv{}{J} \rho \\+ \pdv{}{\theta} \left(\omega + \gamma \sin{\theta}\cos{\theta}\right) \rho + \pdv{}{\theta} \frac{T\gamma}{J\omega}\sin^2\theta \pdv{}{\theta}\rho
+\end{multline} 
+possiamo quindi trascurare le derivate angolari e considerare $\theta$ come uniformemente distribuita lungo la superficie toroidale, ottenendo quindi
 \begin{equation}
-	\pdv{\rho}{t} = \gamma \pdv{}{J} 2J\cos^2\theta\,\,\rho + \pdv{}{J} J\frac{2T\gamma}{\omega}\cos^2\theta \pdv{}{J} \rho
-\end{equation} 
-che, mediato rispetto alla variabile angolare, ritorna
-\begin{equation}
-	\pdv{\rho}{t} = \gamma \pdv{}{J} J\rho + \pdv{}{J} J\frac{T\gamma}{\omega} \pdv{}{J} \rho
+	\pdv{\rho_\theta}{t} = \gamma \pdv{}{J} J\rho_\theta + \pdv{}{J} J\frac{T\gamma}{\omega} \pdv{}{J} \rho_\theta
 	\label{eq:pendolo_fokker_planck_1}
 \end{equation}
 dove abbiamo sfruttato \(\frac{1}{2\pi}\int_0^{2\pi}\cos^2\theta\, d\theta = \frac{1}{2}\).\\
@@ -590,8 +617,6 @@ Si cerca ora un riscontro della teoria nei risultati numerici. Dove non indicato
 	\toprule
 	Costante & {Valore assegnato} \\
 	\midrule
-	$q_0$		& 0.	\\
-	$p_0$		& 1.	\\
 	$\omega$	& 1.	\\
 	$\gamma$	& 0.01	\\
 	$T$			& 10.	\\
@@ -600,6 +625,7 @@ Si cerca ora un riscontro della teoria nei risultati numerici. Dove non indicato
 	\end{tabular}
 	\label{tab:valori_1}
 \end{center}
+E, come condizioni iniziali, viene considerata per la variabile azione $I$ una distribuzione di probabilità iniziale gaussiana a media pari a 10 e varianza unitaria. Per la variabile angolare $\theta$ vengono trattati separatamente il caso in cui la distribuzione iniziale è uniforme (quindi già rilassata) ed il caso in cui invece la distribuzione iniziale è $\rho_0(\theta)=\delta(\theta_0)$.
 
 \subsubsection{Rilassamento all'equilibrio}
 

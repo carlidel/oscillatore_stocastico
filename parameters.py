@@ -17,14 +17,33 @@ dt_sqrt = np.sqrt(dt)
 omega_2 = omega * omega
 sigma = np.sqrt(2 * T * gamma)
 
-# Liouville
-N = int(dt/t_max)
-samples = 1000000
+# Sampling distribution Langevine
+def I_0_gaussian_sampling():
+    return np.random.normal(10., 1.)
+
+def theta_0_uniform_sampling():
+    return np.random.uniform(0., 2 * np.pi)
+
+def theta_0_peack_sampling():
+    return 0.0
+
+def action_angle_to_q_p(I, theta):
+    q = np.sqrt(2 * I / omega) * np.sin(theta)
+    p = np.sqrt(2 * I * omega) * np.cos(theta)
+    return q, p
+
+# Initial distribution Crank
+def I_0_gaussian(I):
+    return (1 / (np.sqrt(2*np.pi))) * np.exp(-(I-10.)^2 / 2)
+
+# Langevine
+N = int(t_max/dt)
+samples = 5000000
 q0 = 0.
 p0 = 1.
 
 # Crank-Nicolson
-L = 500.
-M = 1000
+L = 1000.
+M = 10000
 k = dt
 nsteps = int(k/t_max)

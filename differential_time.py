@@ -106,7 +106,7 @@ x = np.linspace(0, L, M + 1)
 # Condizioni iniziali
 
 u = np.empty((nsteps + 1, M + 1))
-u[0] = np.asarray([5. if j > 0.9 and j < 1.1 else 0. for j in x])
+u[0] = np.asarray([I_0_gaussian(j) for j in x])
 
 # Calcolo rhs in t=0
 

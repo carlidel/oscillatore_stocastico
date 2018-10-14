@@ -29,7 +29,7 @@ P = np.empty((samples, N))
 
 for j in range(samples):
     I0 = I_0_gaussian_sampling()
-    T0 = theta_0_peack_sampling()
+    T0 = theta_0_uniform_sampling()
     qa[0], pa[0] = action_angle_to_q_p(I0, T0)
     for i in range(1, N):
         xi = np.random.normal()
@@ -54,5 +54,5 @@ angle = angle + np.pi
 
 action = np.transpose(action)
 
-np.save("action_time", action)
-np.save("angle_time", angle)
+np.save("action_time_uniform", action)
+np.save("angle_time_uniform", angle)
