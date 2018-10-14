@@ -34,11 +34,11 @@ def action_angle_to_q_p(I, theta):
 
 # Initial distribution Crank
 def I_0_gaussian(I):
-    return (1 / (np.sqrt(2*np.pi))) * np.exp(-(I-10.)^2 / 2)
+    return (1 / (np.sqrt(2*np.pi))) * np.exp(-(I-10.)**2 / 2)
 
 # Langevine
 N = int(t_max/dt)
-samples = 5000000
+samples = 1000000
 q0 = 0.
 p0 = 1.
 

@@ -1,7 +1,0 @@
-executable            = stochastic_pendulum.py
-output                = output/osc1.$(ClusterId).$(ProcId).out
-error                 = error/osc1.$(ClusterId).$(ProcId).err
-log                   = log/osc1.$(ClusterId).log
-+JobFlavour = "tomorrow"
-
-queue 10000

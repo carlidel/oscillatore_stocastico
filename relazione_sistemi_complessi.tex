@@ -624,8 +624,9 @@ Si cerca ora un riscontro della teoria nei risultati numerici. Dove non indicato
 	\bottomrule
 	\end{tabular}
 	\label{tab:valori_1}
+	\caption{Valori numerici usati per le costanti del modello}
 \end{center}
-E, come condizioni iniziali, viene considerata per la variabile azione $I$ una distribuzione di probabilità iniziale gaussiana a media pari a 10 e varianza unitaria. Per la variabile angolare $\theta$ vengono trattati separatamente il caso in cui la distribuzione iniziale è uniforme (quindi già rilassata) ed il caso in cui invece la distribuzione iniziale è $\rho_0(\theta)=\delta(\theta_0)$.
+e, come condizioni iniziali, viene considerata per la variabile azione $I$ una distribuzione di probabilità iniziale gaussiana a media pari a 10 e varianza unitaria. Per la variabile angolare $\theta$ vengono trattati separatamente il caso in cui la distribuzione iniziale è uniforme (quindi già rilassata) ed il caso in cui invece la distribuzione iniziale è $\rho_0(\theta)=\delta(\theta_0)$.
 
 \subsubsection{Rilassamento all'equilibrio}
 
@@ -633,14 +634,14 @@ Dati i valori in Tabella \ref{tab:valori_1}, abbiamo il grafico della distribuzi
 
 Possiamo in primo luogo simulare numericamente l'equazione di Langevin usando l'integratore descritto in Sezione \ref{sec:integratore} ed ottenere il grafico riportato in Fig.~\ref{fig:eq_lang_J_1} per quel che riguarda la variabile Azione \(J\) ed il grafico in Fig~\ref{fig:eq_lang_Th_1} per quel che riguarda la variabile Angolo. Oltre a questi grafici sono anche stati prodotti dei video che permettono di apprezzare la stazionarietà delle distribuzioni.
 
-Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_planck_1}, vogliamo verificare che, con equivalenti condizioni iniziali (un picco di probabilità per \(J=1\), zero altrove), questa converga fino alla soluzione stazionaria. Per integrarla numericamente si fa uso dello schema implicito di Crank-Nicolson impostando come parametri ulteriori necessari\footnote{\(L\) rappresenta la regione considerata per l'integrazione, si pone una barriera assorbente per valori di \(J\) superiori al limite considerato, questo inevitabilmente porterà su lunghi periodi a perdita di flusso, tuttavia, ponendo la barriera molto in avanti, dove la distribuzione teorica di equilibrio assume valori prossimi allo zero, si può ritenere questa perdita trascurabile.}:
+Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_planck_1}, vogliamo verificare che, con equivalenti condizioni iniziali (distribuzione gaussiana a media 10 e varianza unitaria), questa converga fino alla soluzione stazionaria. Per integrarla numericamente si fa uso dello schema implicito di Crank-Nicolson impostando come parametri ulteriori necessari\footnote{\(L\) rappresenta la regione considerata per l'integrazione, si pone una barriera assorbente per valori di \(J\) superiori al limite considerato, questo inevitabilmente porterà su lunghi periodi a perdita di flusso, tuttavia, ponendo la barriera molto in avanti, dove la distribuzione teorica di equilibrio assume valori prossimi allo zero, si può ritenere questa perdita trascurabile.}:
 \begin{center}
 	\begin{tabular}{cc}
 	\toprule
 	Costante & {Valore assegnato} \\
 	\midrule
-	$L$			& [0,200]	\\
-	$dx$		& 0.1	\\
+	\(L\)		& \([0,1000]\)	\\
+	\(dx\)		& \(0.1\)	\\
 	\bottomrule
 	\end{tabular}
 	\label{tab:valori_2}
