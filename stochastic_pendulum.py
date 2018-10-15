@@ -4,19 +4,19 @@ import sys
 from parameters import *
 
 # Functions
-def cstep(q, p, xi, theta, dt_2, dt_3_2):
+def cstep(q, p, xi, theta, sigma, dt_2, dt_3_2):
 	return (dt_2 * 0.5 * (- omega_2 * q - gamma * p)
 	        + sigma * dt_3_2 * (0.5 * xi + theta / (2 * np.sqrt(3))))
 
 
-def qstep(q, p, xi, theta, dt, dt_2, dt_3_2):
-	return q + p * dt + cstep(q, p, xi, theta, dt_2, dt_3_2)
+def qstep(q, p, xi, theta, sigma, dt, dt_2, dt_3_2):
+	return q + p * dt + cstep(q, p, xi, theta, sigma, dt_2, dt_3_2)
 	
 
-def pstep(q1, q2, p, xi, theta, omega_2, dt, dt_2, dt_3_2, dt_sqrt):
+def pstep(q1, q2, p, xi, theta, sigma, omega_2, dt, dt_2, dt_3_2, dt_sqrt):
 	return (p + dt * 0.5 * (-omega_2 * (q1 + q2)) - dt * gamma * p
 	        + sigma * dt_sqrt * xi 
-			- gamma * cstep(q1, p, xi, theta, dt-2, dt_3_2))
+			- gamma * cstep(q1, p, xi, theta, sigma, dt_2, dt_3_2))
 
 
 # Initialization
@@ -34,9 +34,9 @@ for j in range(samples):
 		xi = np.random.normal()
 		theta = np.random.normal()
 		# q
-		qa[i] = qstep(qa[i-1], pa[i-1], xi, theta, dt, dt_2, dt_3_2)
+		qa[i] = qstep(qa[i-1], pa[i-1], xi, theta, sigma, dt, dt_2, dt_3_2)
 		# p
-		pa[i] = pstep(qa[i-1], qa[i], pa[i-1], xi, theta, omega_2,
+		pa[i] = pstep(qa[i-1], qa[i], pa[i-1], xi, theta, sigma, omega_2,
 		              dt, dt_2, dt_3_2, dt_sqrt)
 	Q[j] = qa
 	P[j] = pa

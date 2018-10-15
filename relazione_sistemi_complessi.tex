@@ -611,8 +611,10 @@ dove abbiamo sfruttato \(\frac{1}{2\pi}\int_0^{2\pi}\cos^2\theta\, d\theta = \fr
 
 \subsection{Analisi numerica}
 
-Si cerca ora un riscontro della teoria nei risultati numerici. Dove non indicato diversamente, vengono assegnati i seguenti valori numerici ai parametri delle simulazioni:
-\begin{center}
+Si cerca ora un riscontro della teoria nei risultati numerici. Dove non indicato diversamente, vengono assegnati i valori numerici riportati in Tabella~\ref{tab:valori_1}.
+
+\begin{table}[!h]
+	\centering
 	\begin{tabular}{cS}
 	\toprule
 	Costante & {Valore assegnato} \\
@@ -623,19 +625,20 @@ Si cerca ora un riscontro della teoria nei risultati numerici. Dove non indicato
 	$dt$		& 0.1	\\
 	\bottomrule
 	\end{tabular}
+	\caption{Valori numerici usati per le costanti del modello.}
 	\label{tab:valori_1}
-	\caption{Valori numerici usati per le costanti del modello}
-\end{center}
-e, come condizioni iniziali, viene considerata per la variabile azione $I$ una distribuzione di probabilità iniziale gaussiana a media pari a 10 e varianza unitaria. Per la variabile angolare $\theta$ vengono trattati separatamente il caso in cui la distribuzione iniziale è uniforme (quindi già rilassata) ed il caso in cui invece la distribuzione iniziale è $\rho_0(\theta)=\delta(\theta_0)$.
+\end{table}
+Come condizioni iniziali, viene considerata per la variabile azione $I$ una distribuzione di probabilità iniziale gaussiana a media pari a 10 e varianza unitaria. Per la variabile angolare $\theta$ vengono trattati separatamente il caso in cui la distribuzione iniziale è uniforme (quindi già rilassata) ed il caso in cui invece la distribuzione iniziale è $\rho_0(\theta)=\delta(\theta_0)$.
 
 \subsubsection{Rilassamento all'equilibrio}
 
-Dati i valori in Tabella \ref{tab:valori_1}, abbiamo il grafico della distribuzione di equilibrio per \(\rho(J)\) in Fig.~\ref{fig:equilibrio_J_1}, mentre per \(\rho(\theta)\) si ha una distribuzione uniforme lungo l'intervallo \([0,2\pi]\).
+Dati i valori in Tabella~\ref{tab:valori_1}, abbiamo il grafico della distribuzione di equilibrio per \(\rho(J)\) in Fig.~\ref{fig:equilibrio_J_1}, mentre per \(\rho(\theta)\) si ha una distribuzione uniforme lungo l'intervallo \([0,2\pi]\).
 
 Possiamo in primo luogo simulare numericamente l'equazione di Langevin usando l'integratore descritto in Sezione \ref{sec:integratore} ed ottenere il grafico riportato in Fig.~\ref{fig:eq_lang_J_1} per quel che riguarda la variabile Azione \(J\) ed il grafico in Fig~\ref{fig:eq_lang_Th_1} per quel che riguarda la variabile Angolo. Oltre a questi grafici sono anche stati prodotti dei video che permettono di apprezzare la stazionarietà delle distribuzioni.
 
 Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_planck_1}, vogliamo verificare che, con equivalenti condizioni iniziali (distribuzione gaussiana a media 10 e varianza unitaria), questa converga fino alla soluzione stazionaria. Per integrarla numericamente si fa uso dello schema implicito di Crank-Nicolson impostando come parametri ulteriori necessari\footnote{\(L\) rappresenta la regione considerata per l'integrazione, si pone una barriera assorbente per valori di \(J\) superiori al limite considerato, questo inevitabilmente porterà su lunghi periodi a perdita di flusso, tuttavia, ponendo la barriera molto in avanti, dove la distribuzione teorica di equilibrio assume valori prossimi allo zero, si può ritenere questa perdita trascurabile.}:
-\begin{center}
+\begin{table}[!h]
+	\centering
 	\begin{tabular}{cc}
 	\toprule
 	Costante & {Valore assegnato} \\
@@ -644,8 +647,9 @@ Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_pl
 	\(dx\)		& \(0.1\)	\\
 	\bottomrule
 	\end{tabular}
+	\caption{Parametri extra per integratore di Crank-Nicolson.}
 	\label{tab:valori_2}
-\end{center}
+\end{table}
 Dall'integrazione si ottiene il grafico in Fig.~\ref{fig:eq_crank_1}.
 
 

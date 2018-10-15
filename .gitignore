@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Picutres, Videos and Data
+*.jpg
+*.npy
+*.m4v
+*.pdf
+*.synctex.gz
+
 # C extensions
 *.so
 

@@ -3,8 +3,8 @@ import numpy as np
 omega = 1.
 gamma = 0.01
 T = 10.
-dt = 0.1
-t_max = 50
+dt = 0.2
+t_max = 200
 
 omega0 = 1.
 omega1 = 2.
@@ -12,7 +12,7 @@ omega1 = 2.
 lambda_par = 1/t_max
 
 dt_2 = dt * dt
-dt_3_2 = np.power(dt, 3 / 2)
+dt_3_2 = np.sqrt(np.power(dt, 3))
 dt_sqrt = np.sqrt(dt)
 omega_2 = omega * omega
 sigma = np.sqrt(2 * T * gamma)
@@ -38,12 +38,12 @@ def I_0_gaussian(I):
 
 # Langevine
 N = int(t_max/dt)
-samples = 1000000
+samples = 100000
 q0 = 0.
 p0 = 1.
 
 # Crank-Nicolson
-L = 1000.
-M = 10000
+L = 200.
+M = 4000
 k = dt
-nsteps = int(k/t_max)
+nsteps = int(t_max/k)

@@ -16,7 +16,7 @@ def qstep(q, p, xi, theta, dt, dt_2, dt_3_2):
 def pstep(q1, q2, p, xi, theta, omega_2, dt, dt_2, dt_3_2, dt_sqrt):
 	return (p + dt * 0.5 * (-omega_2 * (q1 + q2)) - dt * gamma * p
 	        + sigma * dt_sqrt * xi 
-			- gamma * cstep(q1, p, xi, theta, dt-2, dt_3_2))
+			- gamma * cstep(q1, p, xi, theta, dt_2, dt_3_2))
 
 
 # Initialization
