@@ -634,49 +634,101 @@ Come condizioni iniziali, viene considerata per la variabile azione $I$ una dist
 
 Dati i valori in Tabella~\ref{tab:valori_1}, abbiamo il grafico della distribuzione di equilibrio per \(\rho(J)\) in Fig.~\ref{fig:equilibrio_J_1}, mentre per \(\rho(\theta)\) si ha una distribuzione uniforme lungo l'intervallo \([0,2\pi]\).
 
-Possiamo in primo luogo simulare numericamente l'equazione di Langevin usando l'integratore descritto in Sezione \ref{sec:integratore} ed ottenere il grafico riportato in Fig.~\ref{fig:eq_lang_J_1} per quel che riguarda la variabile Azione \(J\) ed il grafico in Fig~\ref{fig:eq_lang_Th_1} per quel che riguarda la variabile Angolo. Oltre a questi grafici sono anche stati prodotti dei video che permettono di apprezzare la stazionarietà delle distribuzioni.
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{selected/equilibrium.jpg}
+	\caption{Distribuzione di equilibrio per \(\rho(I)\), la variabile angolare ed il suo parametro di normalizzazione $1/2\pi$ non vengono considerati.}
+	\label{fig:equilibrio_J_1}
+\end{figure}
 
-Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_planck_1}, vogliamo verificare che, con equivalenti condizioni iniziali (distribuzione gaussiana a media 10 e varianza unitaria), questa converga fino alla soluzione stazionaria. Per integrarla numericamente si fa uso dello schema implicito di Crank-Nicolson impostando come parametri ulteriori necessari\footnote{\(L\) rappresenta la regione considerata per l'integrazione, si pone una barriera assorbente per valori di \(J\) superiori al limite considerato, questo inevitabilmente porterà su lunghi periodi a perdita di flusso, tuttavia, ponendo la barriera molto in avanti, dove la distribuzione teorica di equilibrio assume valori prossimi allo zero, si può ritenere questa perdita trascurabile.}:
-\begin{table}[!h]
+Possiamo in primo luogo simulare numericamente l'equazione di Langevin usando l'integratore descritto in Sezione~\ref{sec:integratore} ed ottenere i grafici riportati in Figura~\ref{fig:langevin_0} e~\ref{fig:langevin_150} per quel che riguarda la condizione inziale con variabile angolo concentrata su di un unico valore ed i grafici riportati in Figura~\ref{fig:langevin_uniform_0} e~\ref{fig:langevin_uniform_150} per quel che riguarda la condizione inziale con variabile angolo uniformemente distribuita. Oltre a questi grafici sono anche stati prodotti dei video che permettono di apprezzare l'evoluzione delle distribuzioni. Per ogni grafico e video prodotto sono stati considerati in blocco 100000 diverse realizzazioni del sistema perturbato.
+
+Le diverse condizioni iniziali sulla variabile angolare non interferiscono con il processo di rilassamento della variabile azione. Si osserva inoltre come la variabile angolare risulta avere tempi di rilassamento superiori a quelli della variabile azione.
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/langevine_t_0.jpg}
+	\caption{Integrazione dell'equazione di Langevin, condizioni iniziali con variabile angolo piccata su di un unico valore. La curva arancione rappresenta la distribuzione di equilibrio.}
+	\label{fig:langevin_0}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/langevine_t_150.jpg}
+	\caption{Integrazione dell'equazione di Langevin, rilassamento della variabile azione, condizioni iniziali con variabile angolo piccata su di un unico valore. La curva arancione rappresenta la distribuzione di equilibrio.}
+	\label{fig:langevin_150}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/langevine_uniform_t_0.jpg}
+	\caption{Integrazione dell'equazione di Langevin, condizioni iniziali con variabile già rilassata a distribuzione uniforme. La curva arancione rappresenta la distribuzione di equilibrio.}
+	\label{fig:langevin_uniform_0}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/langevine_uniform_t_150.jpg}
+	\caption{Integrazione dell'equazione di Langevin, rilassamento della variabile azione, condizioni iniziali con variabile già rilassata a distribuzione uniforme. La curva arancione rappresenta la distribuzione di equilibrio.}
+	\label{fig:langevin_uniform_150}
+\end{figure}
+Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_planck_1}, vogliamo verificare che, con equivalenti condizioni iniziali (distribuzione gaussiana a media 10 e varianza unitaria), questa descrivi correttamente il rilassamento della variabile azione fino alla distribuzione di equilbrio, descritto dalla integrazione numerica dell'equazione di Langevin. Per integrarla numericamente si fa uso dello schema implicito di Crank-Nicolson impostando come parametri ulteriori necessari\footnote{\(L\) rappresenta la regione considerata per l'integrazione, si pone una barriera assorbente per valori di \(J\) superiori al limite considerato, questo inevitabilmente porterà su lunghi periodi a perdita di flusso, tuttavia, ponendo la barriera molto in avanti, dove la distribuzione teorica di equilibrio assume valori prossimi allo zero, si può ritenere questa perdita trascurabile.}:
+\begin{table}[!]
 	\centering
 	\begin{tabular}{cc}
 	\toprule
 	Costante & {Valore assegnato} \\
 	\midrule
-	\(L\)		& \([0,1000]\)	\\
-	\(dx\)		& \(0.1\)	\\
+	\(L\)		& \([0,200]\)	\\
+	\(dx\)		& \(0.05\)	\\
 	\bottomrule
 	\end{tabular}
 	\caption{Parametri extra per integratore di Crank-Nicolson.}
 	\label{tab:valori_2}
 \end{table}
-Dall'integrazione si ottiene il grafico in Fig.~\ref{fig:eq_crank_1}.
+L'integrazione di Crank, sovrapposta agli istogrammi ottenuti dall'integrazione dell'equazione di Langevin e alla curva della distribuzione stazionaria, è rappresentata nelle Figure~\ref{fig:crank_1},~\ref{fig:crank_2} e~\ref{fig:crank_3} sovrapponendo i dati di Langevin con distribuzione angolare piccata su di un unico valore e nelle Figure~\ref{fig:crank_4},~\ref{fig:crank_5} e~\ref{fig:crank_6} con i dati di Langevin con distribuzione angolare uniforme. Per quanto il rilassamento si concluda in egual modo sulla prevista distribuzione di equilbrio, si osservano leggere discrepanze nella descrizione dell'evoluzione nei tempi intermedi.
 
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/crank_t_0.jpg}
+	\caption{Integratore di Crank-Nicolson, condizioni iniziali per i dati su istogramma con variabile angolo piccata su di un unico valore.}
+	\label{fig:crank_1}
+\end{figure}
 
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/crank_t_25.jpg}
+	\caption{Integratore di Crank-Nicolson, tempo intermedio, condizioni iniziali per i dati su istogramma con variabile angolo piccata su di un unico valore.}
+	\label{fig:crank_2}
+\end{figure}
 
-\subsubsection{Tempi di rilassamento della variabile angolare}
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/crank_t_150.jpg}
+	\caption{Integratore di Crank-Nicolson, rilassamento, condizioni iniziali per i dati su istogramma con variabile angolo piccata su di un unico valore.}
+	\label{fig:crank_3}
+\end{figure}
 
-\subsubsection{Analisi del processo di ritorno all'equilibrio}
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/crank_uniform_t_0.jpg}
+	\caption{Integratore di Crank-Nicolson, condizioni iniziali per i dati su istogramma con variabile angolo uniformemente distribuita.}
+	\label{fig:crank_4}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/crank_uniform_t_25.jpg}
+	\caption{Integratore di Crank-Nicolson, tempo intermedio, condizioni iniziali per i dati su istogramma con variabile angolo uniformemente distribuita.}
+	\label{fig:crank_5}
+\end{figure}
 
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{selected/crank_uniform_t_150.jpg}
+	\caption{Integratore di Crank-Nicolson, rilassamento, condizioni iniziali per i dati su istogramma con variabile angolo uniformemente distribuita.}
+	\label{fig:crank_6}
+\end{figure}
 
-\section{Oscillatore armonico con frequenza lentamente variante nel tempo}
-
-Consideriamo adesso la seguente equazione di Langevin:
-\begin{align}
-	\dot{q} &= p \\
-	\dot{p} &= -\omega^2(\lambda)q - \gamma p + \sqrt{2T\gamma} \xi(t)
-\end{align}
-dove \(\lambda\in[0,1]\) è un parametro dipendente linearmente col tempo che varia molto lentamente. Trattiamo la funzione di \(\omega\) nella forma
-\begin{equation}
- 	\omega (\lambda) = \lambda \omega_1 + (-\lambda + 1) \omega_0
-\end{equation} 
-con \(\omega_1 > \omega_0\).
-
-\subsection{Analisi numerica}
 
 \end{document}
