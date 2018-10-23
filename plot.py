@@ -5,6 +5,7 @@ from parameters import *
 
 dpi = 300
 tskip = 5
+p = 0
 
 def stationary_distribution(action, omega, T):
     return omega / (T) * np.exp(- action * omega / T)
@@ -25,9 +26,10 @@ os.system("mkdir crank_time_uniform")
 
 x = np.arange(0., 100., 0.1)
 plt.plot(x, stationary_distribution(x, omega, T))
-plt.show()
+#plt.show()
 
 #%%
+
 # Langevine
 os.system("del \"langevine\\*.jpg\"")
 
@@ -35,6 +37,7 @@ action = np.load("action.npy")
 angle = np.load("angle.npy")
 
 action_max = np.amax(action)
+p = 0
 for i in range(len(action)):
     if i % tskip == 0:
         print(str(i) + "/" + str(len(action)))
@@ -53,8 +56,9 @@ for i in range(len(action)):
         plt.title("Angle Variable, t = {:.2f}".format(i * dt))
         # Save
         plt.tight_layout()
-        plt.savefig("langevine/foo" + str(i).zfill(5) + ".jpg", dpi=dpi)
+        plt.savefig("langevine/foo" + str(p).zfill(5) + ".jpg", dpi=dpi)
         plt.clf()
+        p += 1
 
 # Make video
 filename = "langevine"
@@ -68,6 +72,7 @@ action = np.load("action_uniform.npy")
 angle = np.load("angle_uniform.npy")
 
 action_max = np.amax(action)
+p = 0
 for i in range(len(action)):
     if i % tskip == 0:
         print(str(i) + "/" + str(len(action)))
@@ -86,8 +91,9 @@ for i in range(len(action)):
         plt.title("Angle Variable, t = {:.2f}".format(i * dt))
         # Save
         plt.tight_layout()
-        plt.savefig("langevine_uniform/foo" + str(i).zfill(5) + ".jpg", dpi=dpi)
+        plt.savefig("langevine_uniform/foo" + str(p).zfill(5) + ".jpg", dpi=dpi)
         plt.clf()
+        p += 1
 
 # Make video
 filename = "langevine_uniform"
@@ -99,6 +105,7 @@ os.system("del \"crank\\*.jpg\"")
 u = np.load("crank.npy")
 x = np.linspace(0, L, M)
 action = np.load("action.npy")
+p = 0
 for i in range(len(action)):
     if i % tskip == 0:
         print(str(i) + "/" + str(len(u)))
@@ -112,8 +119,9 @@ for i in range(len(action)):
         plt.legend()
         # Save
         plt.tight_layout()
-        plt.savefig("crank/foo" + str(i).zfill(5) + ".jpg", dpi=dpi)
+        plt.savefig("crank/foo" + str(p).zfill(5) + ".jpg", dpi=dpi)
         plt.clf()
+        p += 1
 
 # Make video
 filename = "crank"
@@ -126,6 +134,7 @@ os.system("del \"crank_uniform\\*.jpg\"")
 u = np.load("crank.npy")
 x = np.linspace(0, L, M)
 action = np.load("action_uniform.npy")
+p = 0
 for i in range(len(action)):
     if i % tskip == 0:
         print(str(i) + "/" + str(len(action)))
@@ -139,8 +148,9 @@ for i in range(len(action)):
         plt.legend()
         # Save
         plt.tight_layout()
-        plt.savefig("crank_uniform/foo" + str(i).zfill(5) + ".jpg", dpi=dpi)
+        plt.savefig("crank_uniform/foo" + str(p).zfill(5) + ".jpg", dpi=dpi)
         plt.clf()
+        p += 1
 
 # Make video
 filename = "crank_uniform"

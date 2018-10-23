@@ -28,7 +28,7 @@ for i in range(M - 1):
             - a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)
         ) if j == i - 1 else
         (
-            + 1 / (2 * k) 
+            + 1 / (k) 
             - c(gamma) / 2 
             + a(T, gamma, omega, (i + 1/2) * h) / (2 * h * h)
             + a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)
@@ -45,7 +45,7 @@ for i in range(M - 1):
             + a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)
         ) if j == i - 1 else
         (
-            + 1 / (2 * k) 
+            + 1 / (k) 
             + c(gamma) / 2 
             - a(T, gamma, omega, (i + 1/2) * h) / (2 * h * h)
             - a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)
