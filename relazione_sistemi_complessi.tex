@@ -101,7 +101,7 @@ tale sviluppo si ottiene a partire dalla forma integrale
 Questa forma integrale può essere iterata nella seguente forma
 \begin{align}
 	\vb{U}(t) &= I + \sum_{n=1}^{\infty}\int_0^t dt_1 \int_0^{t_1} dt_2 \cdots \int_0^{t_{n-1}}dt_n \vb{H}(t_1) \vb{H}(t_2)\cdots \vb{H}(t_n) = \\
-	&= I + \sum_{n=1}^{\infty} \frac{1}{n!} \int_0^t dt_1 \int_0^{t_1} dt_2 \cdots \int_0^{t_{n-1}}dt_n \mathds{T}(\vb{H}(t_1) \vb{H}(t_2)\cdots \vb{H}(t_n))\\
+	&= I + \sum_{n=1}^{\infty} \frac{1}{n!} \int_0^t dt_1 \int_0^{t} dt_2 \cdots \int_0^{t}dt_n \mathds{T}(\vb{H}(t_1) \vb{H}(t_2)\cdots \vb{H}(t_n))\\
 	&= \exp(\mathds{T} \int_0^y \vb{H}(s)\,ds)
 \end{align}
 Dove \(\mathds{T}\) è l'operatore di ordinamento temporale. Per giustificare l'ultima uguaglianza basta considerare che (caso per \(n=2\))
@@ -120,7 +120,7 @@ Ponendo \(\vb{U} = \vb{U}_A\) si ha come conseguente risultato che
 \begin{equation}
 	\vb{U}_{A} \pdv{\vb{U}_I}{t} = \xi \vb{B}\vb{U}_A \vb{U}_I
 \end{equation}
-che, ponendo la notazione \(\vb{B}_I = \vb{U}_A^{-1}\vb{B}\vb{U}_A\) si scrive
+che, ponendo la notazione \(\vb{B}_I = \vb{U}_A^{-1} \vb{B}\vb{U}_A\) si scrive
 \begin{equation}
 	\pdv{\vb{U}_I}{t} = \xi \vb{B}_I \vb{U}_I
 \end{equation}
@@ -548,7 +548,7 @@ Come abbiamo visto nelle sezioni precedenti, molto spesso si ha a che fare con u
 \end{equation}
 è possibile in questo caso compiere la seguente discretizzazione per la costruzione dell'integratore di Crank-Nicolson:
 \begin{align}
-	u_t &\Rightarrow \frac{1}{2k}\delta_t U_m^n,\\
+	u_t &\Rightarrow \frac{1}{k}\delta_t U_m^n,\\
 	{(\alpha(x,t)u_x)}_x &\Rightarrow \frac{1}{2h}\left(\alpha_{m+\frac{1}{2}}^n \frac{\delta_x U_m^n}{h} - \alpha_{m-\frac{1}{2}}^n \frac{\delta_x U_{m-1}^n}{h}\right) + \frac{1}{2h}\left(\alpha_{m+\frac{1}{2}}^{n+1} \frac{\delta_x U_m^{n+1}}{h} - \alpha_{m-\frac{1}{2}}^{n+1} \frac{\delta_x U_{m-1}^{n+1}}{h}\right)\\
 	\beta(x,t)u_x &\Rightarrow \frac{1}{4h}(\beta_m^n(U_{m+1}^n - U_{m-1}^n) + \beta_m^{n+1}(U_{m+1}^{n+1} - U_{m-1}^{n+1}))\\
 	\gamma(x,t)u &\Rightarrow \frac{1}{2}(\gamma_m^n U_m^n + \gamma_m^{n+1} U_m^{n+1})
@@ -686,7 +686,7 @@ Per quanto riguarda invece l'equazione differenziale \eqref{eq:pendolo_fokker_pl
 	\caption{Parametri extra per integratore di Crank-Nicolson.}
 	\label{tab:valori_2}
 \end{table}
-L'integrazione di Crank, sovrapposta agli istogrammi ottenuti dall'integrazione dell'equazione di Langevin e alla curva della distribuzione stazionaria, è rappresentata nelle Figure~\ref{fig:crank_1},~\ref{fig:crank_2} e~\ref{fig:crank_3} sovrapponendo i dati di Langevin con distribuzione angolare piccata su di un unico valore e nelle Figure~\ref{fig:crank_4},~\ref{fig:crank_5} e~\ref{fig:crank_6} con i dati di Langevin con distribuzione angolare uniforme. Per quanto il rilassamento si concluda in egual modo sulla prevista distribuzione di equilbrio, si osservano leggere discrepanze nella descrizione dell'evoluzione nei tempi intermedi.
+L'integrazione di Crank, sovrapposta agli istogrammi ottenuti dall'integrazione dell'equazione di Langevin e alla curva della distribuzione stazionaria, è rappresentata nelle Figure~\ref{fig:crank_1},~\ref{fig:crank_2} e~\ref{fig:crank_3} sovrapponendo i dati di Langevin con distribuzione angolare piccata su di un unico valore e nelle Figure~\ref{fig:crank_4},~\ref{fig:crank_5} e~\ref{fig:crank_6} con i dati di Langevin con distribuzione angolare uniforme. Si osserva in ogni momento perfetta coerenza tra i risultati dei due integratori.
 
 \begin{figure}[p]
 	\centering

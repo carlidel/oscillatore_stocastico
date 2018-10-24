@@ -25,7 +25,7 @@ def generate_matrices(T, gamma, omega0, omega1, M, h, k, lambda_par, t):
             (b(gamma, (i) * h) / (4 * h)
             - a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)
             ) if j == i - 1 else
-            (1 / (2 * k)
+            (1 / (k)
             - c(gamma) / 2
             + a(T, gamma, omega, (i + 1/2) * h) / (2 * h * h)
             + a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)
@@ -39,7 +39,7 @@ def generate_matrices(T, gamma, omega0, omega1, M, h, k, lambda_par, t):
             (- b(gamma, (i) * h) / (4 * h)
             + a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)
             ) if j == i - 1 else
-            (1 / (2 * k)
+            (1 / (k)
             + c(gamma) / 2
             - a(T, gamma, omega, (i + 1/2) * h) / (2 * h * h)
             - a(T, gamma, omega, (i - 1/2) * h) / (2 * h * h)

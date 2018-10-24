@@ -4,7 +4,7 @@ import os
 from parameters import *
 
 dpi = 300
-tskip = 5
+tskip = 1
 p = 0
 
 def stationary_distribution(action, omega, T):
@@ -62,7 +62,7 @@ for i in range(len(action)):
 
 # Make video
 filename = "langevine"
-os.system("ffmpeg -y -i \"langevine\\foo%05d.jpg\" " + filename + ".m4v")
+os.system("ffmpeg -y -i \"langevine\\foo%05d.jpg\" " + filename + ".mp4")
 
 #%%
 # Langevine Uniform
@@ -97,7 +97,7 @@ for i in range(len(action)):
 
 # Make video
 filename = "langevine_uniform"
-os.system("ffmpeg -y -i \"langevine_uniform\\foo%05d.jpg\" " + filename + ".m4v")
+os.system("ffmpeg -y -i \"langevine_uniform\\foo%05d.jpg\" " + filename + ".mp4")
 
 #%%
 # Crank-Nicolson
@@ -125,7 +125,7 @@ for i in range(len(action)):
 
 # Make video
 filename = "crank"
-os.system("ffmpeg -y -i \"crank\\foo%05d.jpg\" " + filename + ".m4v")
+os.system("ffmpeg -y -i \"crank\\foo%05d.jpg\" " + filename + ".mp4")
 
 #%%
 # Crank-Nicolson_uniform
@@ -154,7 +154,7 @@ for i in range(len(action)):
 
 # Make video
 filename = "crank_uniform"
-os.system("ffmpeg -y -i \"crank_uniform\\foo%05d.jpg\" " + filename + ".m4v")
+os.system("ffmpeg -y -i \"crank_uniform\\foo%05d.jpg\" " + filename + ".mp4")
 
 """ #%%
 # Langevine_time

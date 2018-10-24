@@ -39,11 +39,13 @@ def I_0_gaussian(I):
 # Langevine
 N = int(t_max/dt)
 samples = 100000
+#samples = 1000
 q0 = 0.
 p0 = 1.
 
 # Crank-Nicolson
 L = 200.
 M = 4000
+#M = 1000
 k = dt
 nsteps = int(t_max/k)
