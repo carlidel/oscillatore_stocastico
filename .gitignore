@@ -7,7 +7,6 @@ __pycache__/
 *.jpg
 *.npy
 *.m4v
-*.pdf
 *.synctex.gz
 
 # C extensions
